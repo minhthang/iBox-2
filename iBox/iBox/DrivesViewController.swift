@@ -85,7 +85,7 @@ class DrivesViewController: UITableViewController, NSFetchedResultsControllerDel
     
     // MARK: - Actions
     
-    func irqStepperValueDidChange(_ sender: UIStepper) {
+  @objc func irqStepperValueDidChange(_ sender: UIStepper) {
         
         // get model object
         let sectionInfo = self.fetchedResultsController!.sections![sender.tag] as NSFetchedResultsSectionInfo
@@ -242,15 +242,15 @@ class DrivesViewController: UITableViewController, NSFetchedResultsControllerDel
         headerView.ataLabel.text = NSLocalizedString("ATA Interface", comment: "ATA Interface") + " \(ataInterface.id.intValue)"
         headerView.irqLabel.text = NSLocalizedString("IRQ", comment: "IRQ") + " \(ataInterface.irq.intValue)"
         headerView.irqStepper.value = ataInterface.irq.doubleValue
-        headerView.irqStepper.addTarget(self, action: #selector(DrivesViewController.irqStepperValueDidChange(_:)), for: UIControlEvents.valueChanged)
+      headerView.irqStepper.addTarget(self, action: #selector(DrivesViewController.irqStepperValueDidChange(_:)), for: UIControl.Event.valueChanged)
         headerView.irqStepper.tag = section
         
         return headerView
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
-        if editingStyle == UITableViewCellEditingStyle.delete {
+    if editingStyle == UITableViewCell.EditingStyle.delete {
             
             // get the model object
             let drive = self.fetchedResultsController!.object(at: indexPath) as! Drive
@@ -294,14 +294,14 @@ class DrivesViewController: UITableViewController, NSFetchedResultsControllerDel
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .insert:
-            tableView.insertRows(at: [newIndexPath!], with: UITableViewRowAnimation.fade)
+          tableView.insertRows(at: [newIndexPath!], with: UITableView.RowAnimation.fade)
         case .delete:
-            tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.fade)
+          tableView.deleteRows(at: [indexPath!], with: UITableView.RowAnimation.fade)
         case .update:
             self.configureCell(tableView.cellForRow(at: indexPath!)!, atIndexPath: indexPath!)
         case .move:
-            tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.fade)
-            tableView.insertRows(at: [newIndexPath!], with: UITableViewRowAnimation.fade)
+          tableView.deleteRows(at: [indexPath!], with: UITableView.RowAnimation.fade)
+          tableView.insertRows(at: [newIndexPath!], with: UITableView.RowAnimation.fade)
         }
     }
     

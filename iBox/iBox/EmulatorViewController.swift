@@ -76,7 +76,7 @@ class EmulatorViewController: UIViewController {
     
     @IBOutlet weak var keyboardContainer: UIView!
     
-    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) { //temporary "hide"
+  override func motionEnded(_ motion: UIEvent.EventSubtype, with event: UIEvent?) { //temporary "hide"
         if !keyboardContainer.isHidden && view.frame.width > view.frame.height{
             var newFrame: CGRect = BXRenderView.sharedInstance().frame
             if renderContainerView.frame.size.width / 1.5 > view.frame.height {
@@ -210,22 +210,22 @@ class EmulatorViewController: UIViewController {
         }
     }
     
-    func startEmulator() {
+  @objc func startEmulator() {
         
         let configFilePath = self.exportConfigurationToTemporaryFile(self.configuration!)
         
         BXEmulator.startBochs(withConfigPath: configFilePath);
     }
     
-    func startRendering() {
+  @objc func startRendering() {
         
         let timer = Timer(timeInterval: 0.01, target: self, selector: #selector(EmulatorViewController.redrawRenderer), userInfo: nil, repeats: true)
         
-        RunLoop.current.add(timer, forMode: RunLoopMode.defaultRunLoopMode)
+    RunLoop.current.add(timer, forMode: RunLoop.Mode.default)
         RunLoop.current.run()
     }
     
-    func redrawRenderer() {
+  @objc func redrawRenderer() {
         
         BXRenderView.sharedInstance().doRedraw()
     }

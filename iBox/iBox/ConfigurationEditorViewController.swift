@@ -174,7 +174,7 @@ class ConfigurationEditorViewController: UITableViewController {
         
         if error != nil {
             
-            let alertController = UIAlertController(title: NSLocalizedString("Error", comment: "Error"), message: NSLocalizedString("Could not save configuration.", comment: "Could not save configuration.") + " \\(\(error!.localizedDescription)\\)", preferredStyle: UIAlertControllerStyle.alert)
+          let alertController = UIAlertController(title: NSLocalizedString("Error", comment: "Error"), message: NSLocalizedString("Could not save configuration.", comment: "Could not save configuration.") + " \\(\(error!.localizedDescription)\\)", preferredStyle: UIAlertController.Style.alert)
             
             self.present(alertController, animated: true, completion: nil)
             

@@ -101,7 +101,7 @@ class ConfigurationsViewController: UITableViewController, UISearchBarDelegate, 
     
     // MARK: - UITableViewDelegate
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         // get the model object
         let configuration = self.fetchedResultsController?.object(at: indexPath) as! Configuration
@@ -121,7 +121,7 @@ class ConfigurationsViewController: UITableViewController, UISearchBarDelegate, 
         
         if error != nil {
             
-            let alertController = UIAlertController(title: NSLocalizedString("Error", comment: "Error"), message: NSLocalizedString("Could not delete configuration.", comment: "Could not delete configuration.") + " \\(\(error!.localizedDescription)\\)", preferredStyle: UIAlertControllerStyle.alert)
+          let alertController = UIAlertController(title: NSLocalizedString("Error", comment: "Error"), message: NSLocalizedString("Could not delete configuration.", comment: "Could not delete configuration.") + " \\(\(error!.localizedDescription)\\)", preferredStyle: UIAlertController.Style.alert)
             
             self.present(alertController, animated: true, completion: nil)
         }
@@ -162,14 +162,14 @@ class ConfigurationsViewController: UITableViewController, UISearchBarDelegate, 
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .insert:
-            tableView.insertRows(at: [newIndexPath!], with: UITableViewRowAnimation.fade)
+          tableView.insertRows(at: [newIndexPath!], with: UITableView.RowAnimation.fade)
         case .delete:
-            tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.fade)
+          tableView.deleteRows(at: [indexPath!], with: UITableView.RowAnimation.fade)
         case .update:
             self.configureCell(tableView.cellForRow(at: indexPath!)!, atIndexPath: indexPath!)
         case .move:
-            tableView.deleteRows(at: [indexPath!], with: UITableViewRowAnimation.fade)
-            tableView.insertRows(at: [newIndexPath!], with: UITableViewRowAnimation.fade)
+          tableView.deleteRows(at: [indexPath!], with: UITableView.RowAnimation.fade)
+          tableView.insertRows(at: [newIndexPath!], with: UITableView.RowAnimation.fade)
         }
     }
     

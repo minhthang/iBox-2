@@ -57,7 +57,7 @@ class FileSelectionViewController: UITableViewController {
         // create alert controller
         let alertController = UIAlertController(title: NSLocalizedString("Create New HDD Image", comment: "Create New HDD Image Alert Controller Title"),
             message: NSLocalizedString("Specify a size (in MB) and a name", comment: "Create New HDD Image Alert Controller Message"),
-            preferredStyle: UIAlertControllerStyle.alert)
+            preferredStyle: UIAlertController.Style.alert)
         
         // add text fields
         alertController.addTextField { (textField: UITextField!) -> Void in
@@ -71,12 +71,12 @@ class FileSelectionViewController: UITableViewController {
         }
         
         // add create and cancel button
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: UIAlertActionStyle.cancel, handler: { (action: UIAlertAction!) -> Void in
+      alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: UIAlertAction.Style.cancel, handler: { (action: UIAlertAction!) -> Void in
             
             alertController.dismiss(animated: true, completion: nil)
         }))
         
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Create", comment: "Create"), style: UIAlertActionStyle.default, handler: { (action: UIAlertAction!) -> Void in
+      alertController.addAction(UIAlertAction(title: NSLocalizedString("Create", comment: "Create"), style: UIAlertAction.Style.default, handler: { (action: UIAlertAction!) -> Void in
             
             // TODO: should probably validate file name (e.g. no spaces or invalid characters) and size text
             
@@ -112,9 +112,9 @@ class FileSelectionViewController: UITableViewController {
                         
                         let alertView = UIAlertController(title: NSLocalizedString("Error", comment: "Error"),
                             message: NSLocalizedString("Could not create the image", comment: "Could not create the image"),
-                            preferredStyle: UIAlertControllerStyle.alert)
+                            preferredStyle: UIAlertController.Style.alert)
                         
-                        alertView.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: UIAlertActionStyle.cancel, handler: { (action: UIAlertAction!) -> Void in
+                      alertView.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Cancel"), style: UIAlertAction.Style.cancel, handler: { (action: UIAlertAction!) -> Void in
                             
                             alertView.dismiss(animated: true, completion: nil)
                         }))
@@ -139,7 +139,7 @@ class FileSelectionViewController: UITableViewController {
                         self.files = (self.files as NSArray).sortedArray(using: #selector(NSNumber.compare(_:))) as!
                             [String]
                         let index = self.files.index(of: fileName)!
-                        self.tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: UITableViewRowAnimation.automatic)
+                      self.tableView.insertRows(at: [IndexPath(row: index, section: 0)], with: UITableView.RowAnimation.automatic)
                     }
                     
                     // save values
@@ -204,8 +204,9 @@ class FileSelectionViewController: UITableViewController {
     }
     
     // MARK: - UITableViewDelegate
+  
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+  override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         
         // get file
         let fileName = self.files[indexPath.row]
@@ -239,7 +240,7 @@ class FileSelectionViewController: UITableViewController {
             
             // remove table view cell row with animation
             tableView.beginUpdates()
-            tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            tableView.deleteRows(at: [indexPath], with: UITableView.RowAnimation.automatic)
             tableView.endUpdates()
             
         default:
