@@ -12,6 +12,7 @@ import BochsKit
 
 private let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first as URL?
 
+
 class EmulatorViewController: UIViewController {
     
     // MARK: - IB Outlets
@@ -23,15 +24,18 @@ class EmulatorViewController: UIViewController {
     // MARK: - Properties
 
     var configuration: Configuration?
-    var generator: UISelectionFeedbackGenerator?
-    var generator2: UINotificationFeedbackGenerator?
-
+//  if #available(iOS 10.0, *) {
+//    var generator: UISelectionFeedbackGenerator?
+//    var generator2: UINotificationFeedbackGenerator?
+//  }
     // MARK: - Initialization
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.generator = UISelectionFeedbackGenerator()
-        self.generator2 = UINotificationFeedbackGenerator()
+//      if #available(iOS 10.0, *) {
+//        self.generator = UISelectionFeedbackGenerator()
+//        self.generator2 = UINotificationFeedbackGenerator()
+//      }
         let app = UIApplication.shared
         app.isIdleTimerDisabled = true
         // add render view
@@ -88,7 +92,9 @@ class EmulatorViewController: UIViewController {
             keyboardContainer.isHidden = true
             BXRenderView.sharedInstance().frame = newFrame
             BXRenderView.sharedInstance().rescaleFrame()
-            generator2?.notificationOccurred(.success)
+//          if #available(iOS 10.0, *) {
+//            generator2?.notificationOccurred(.success)
+//          }
         } else {
             keyboardContainer.isHidden = false
             BXRenderView.sharedInstance().frame = self.renderContainerView.frame
@@ -114,7 +120,9 @@ class EmulatorViewController: UIViewController {
     
     @IBAction func keyDown(_ sender: UIButton) {
         if configuration?.feedbackEnabled.boolValue == true {
-            self.generator!.selectionChanged()
+//          if #available(iOS 10.0, *) {
+//            self.generator!.selectionChanged()
+//          }
         }
         if sender.tag == 200 { //etc
             if self.etcced == true {
